@@ -32,6 +32,10 @@ import org.apache.commons.lang.StringUtils;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.xml.namespace.QName;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -56,42 +60,63 @@ public final class SimpleService_P1_Client {
 
     public static void main(String args[]) throws java.lang.Exception {
     	
+    	
+    	
     	Client client2 = Client.create();
 		
 		WebResource webResource = client2.resource("http://pccompshop.com/home/?q=es/endpoint/comment/4");
 		ClientResponse response = webResource.accept("application/xml").get(ClientResponse.class);
 		Result result = response.getEntity(Result.class);
-		System.out.println(result.getSubject());
+		//System.out.println(result.getSubject());
+		int producto = result.getNid();
 		
+		WebResource webResource2 = client2.resource("http://pccompshop.com/home/?q=es/endpoint/node/"+producto);
+		ClientResponse response2 = webResource2.accept("application/xml").get(ClientResponse.class);
+		String result2 = response2.getEntity(String.class);
+		//System.out.println(result2);
+		
+		String titulo = StringUtils.substringBetween(result2, "<title>", "</title>");
+		String categoria = StringUtils.substringBetween(result2, "<type>", "</type>");
 		
 		WebResource webResource2P = client2.resource("http://pccompshop.com/home/?q=es/endpoint/user/token");
 		ClientResponse response2P = webResource2P.type(MediaType.APPLICATION_FORM_URLENCODED_TYPE).post(ClientResponse.class, null);
 		String outputP = response2P.getEntity(String.class);
 		String token = StringUtils.substringBetween(outputP, "<token>", "</token>");
-		System.out.println("Token: "+token);
 		
-		
-		
+
 		MultivaluedMap params = new MultivaluedMapImpl();
 		params.add("username", "test");
 		params.add("password", "test");
 		WebResource webLogin = client2.resource("http://pccompshop.com/home/?q=es/endpoint/user/login");
 		ClientResponse responseLogin = webLogin.header(token, "X-CSRF-Token").type(MediaType.APPLICATION_FORM_URLENCODED).post(ClientResponse.class, params);
 		String output = responseLogin.getEntity(String.class);
-		System.out.println(output);
+		//System.out.println(output);
 		
+		
+		String email = StringUtils.substringBetween(output, "<mail>", "</mail>");
+		String nombre = StringUtils.substringBetween(output, "<name>", "</name>");
+		String auth = StringUtils.substringBetween(output, "<roles", "</roles>");
+		String isauth = auth.substring(23,41);
+		String rol = auth.substring(54,67);
+		
+		System.out.println("\nINICIANDO LA EJECUCIÓN");
+		System.out.println("\nInformación del usuario logeado:");
+		System.out.println("Usuario: "+nombre);
+		System.out.println("Correo: "+email);
+		System.out.println("¿Está autenticado?: "+isauth);
+		System.out.println("Rol: "+rol);
+		Date date = new Date();
+		DateFormat hourdateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		String fecha = hourdateFormat.format(date);
+		System.out.println("\nInformación de la sesión");
+		System.out.println("Token inicial: "+token);
 		String newToken = StringUtils.substringBetween(output, "<token>", "</token>");
 		System.out.println("New Token: "+newToken);
 		String SessionId = StringUtils.substringBetween(output, "<sessid>", "</sessid>");
 		System.out.println("Session ID: "+SessionId);
 		String SessionName = StringUtils.substringBetween(output, "<session_name>", "</session_name>");
 		System.out.println("Session name: "+SessionName);
-		
-		//result.setSubject("COMENTARIO NUEVO");
-		System.out.println("Nuevo título: "+result.getSubject());
-		//Result.CommentBody comment = result.getCommentBody();
-		//System.out.println("Comentario: "+comment);
-		
+			
 
     	
         URL wsdlURL = SimpleService_Service.WSDL_LOCATION;
@@ -112,17 +137,31 @@ public final class SimpleService_P1_Client {
         SimpleService port = ss.getP1();  
         
         {
-        System.out.println("Invoking concat...");
-        java.lang.String _concat_s1 = "PEPASO";
-        java.lang.String _concat_s2 = "PEPITO";
+        System.out.println("\nInvocando concatenación SOAP Wrapper!");
+        System.out.println("@Param1: "+titulo);
+        System.out.println("@Param2: "+categoria);
+        java.lang.String _concat_s1 = titulo;
+        java.lang.String _concat_s2 = categoria;
         java.lang.String _concat__return = port.concat(_concat_s1, _concat_s2);
-        System.out.println("concat.result=" + _concat__return);
-        result.setSubject(_concat__return);
-        result.getCommentBody().getUnd().getItem().setValue("Este comentario está editado");
+        System.out.println("Resultado de la concatenación del servicio SOAP wrapper: ");
+        System.out.println(_concat__return);
+        
+        System.out.println("\nProducto del comentario:");
+        System.out.println("Producto de referencia: "+titulo);
+		System.out.println("Categoría del producto: "+categoria);
+        
+        System.out.println("\nModificaciones:");
+        System.out.println("Asunto actual: "+result.getSubject());
+        result.setSubject("Comentario sobre el producto: "+titulo);
+        System.out.println("Nuevo asunto: "+result.getSubject());
+        System.out.println("Cuerpo actual:\n "+result.getCommentBody().getUnd().getItem().getValue());
+        result.getCommentBody().getUnd().getItem().setValue("Modificado por: "+ nombre + ", el día: " + fecha+".\n"+_concat__return);
+        System.out.println("Cuerpo actualizado:\n "+result.getCommentBody().getUnd().getItem().getValue());
+        
         WebResource change = client2.resource("http://pccompshop.com/home/?q=es/endpoint/comment/4");
 		ClientResponse respuesta = change.header(newToken, "X-CSRF-Token").header("cookie",SessionName+"="+SessionId).put(ClientResponse.class, result);
 		String prf = respuesta.getEntity(String.class);
-		System.out.println(prf);
+		System.out.println("\nFINALIZADA LA EJECUCIÓN");
 
 
         }
