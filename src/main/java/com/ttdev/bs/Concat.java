@@ -1,10 +1,3 @@
-//
-// Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.2.6 
-// Visite <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: AM.05.02 a las 10:02:42 AM CVT 
-//
-
 
 package com.ttdev.bs;
 
@@ -25,8 +18,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="isbn" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="s1" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="s2" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,63 +30,63 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "isbn",
-    "title"
+    "s1",
+    "s2"
 })
-@XmlRootElement(name = "book")
-public class Book {
+@XmlRootElement(name = "concat")
+public class Concat {
 
     @XmlElement(required = true)
-    protected String isbn;
+    protected String s1;
     @XmlElement(required = true)
-    protected String title;
+    protected String s2;
 
     /**
-     * Obtiene el valor de la propiedad isbn.
+     * Obtiene el valor de la propiedad s1.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getIsbn() {
-        return isbn;
+    public String getS1() {
+        return s1;
     }
 
     /**
-     * Define el valor de la propiedad isbn.
+     * Define el valor de la propiedad s1.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setIsbn(String value) {
-        this.isbn = value;
+    public void setS1(String value) {
+        this.s1 = value;
     }
 
     /**
-     * Obtiene el valor de la propiedad title.
+     * Obtiene el valor de la propiedad s2.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getTitle() {
-        return title;
+    public String getS2() {
+        return s2;
     }
 
     /**
-     * Define el valor de la propiedad title.
+     * Define el valor de la propiedad s2.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setTitle(String value) {
-        this.title = value;
+    public void setS2(String value) {
+        this.s2 = value;
     }
 
 }

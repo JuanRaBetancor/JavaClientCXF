@@ -12,6 +12,10 @@ package com.ttdev.bs;
 import javax.xml.bind.annotation.XmlRegistry;
 
 
+import com.ttdev.bs.Concat;
+import com.ttdev.bs.ConcatResponse;
+
+
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
@@ -67,6 +71,18 @@ public class ObjectFactory {
      */
     public Result.CommentBody.Und.Item createResultCommentBodyUndItem() {
         return new Result.CommentBody.Und.Item();
+    }
+    
+    public ConcatResponse createConcatResponse() {
+        return new ConcatResponse();
+    }
+
+    /**
+     * Create an instance of {@link Concat }
+     * 
+     */
+    public Concat createConcat() {
+        return new Concat();
     }
 
 }
