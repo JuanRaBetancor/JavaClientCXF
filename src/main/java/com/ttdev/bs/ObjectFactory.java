@@ -2,11 +2,12 @@
 // Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.2.6 
 // Visite <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: PM.05.21 a las 11:07:47 PM BST 
+// Generado el: PM.05.22 a las 04:32:00 PM BST 
 //
 
 
 package com.ttdev.bs;
+
 
 import javax.xml.bind.annotation.XmlRegistry;
 
@@ -45,123 +46,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Result.FieldDescripciN }
+     * Create an instance of {@link Result.CommentBody }
      * 
      */
-    public Result.FieldDescripciN createResultFieldDescripciN() {
-        return new Result.FieldDescripciN();
+    public Result.CommentBody createResultCommentBody() {
+        return new Result.CommentBody();
     }
 
     /**
-     * Create an instance of {@link Result.FieldDescripciN.Und }
+     * Create an instance of {@link Result.CommentBody.Und }
      * 
      */
-    public Result.FieldDescripciN.Und createResultFieldDescripciNUnd() {
-        return new Result.FieldDescripciN.Und();
+    public Result.CommentBody.Und createResultCommentBodyUnd() {
+        return new Result.CommentBody.Und();
     }
 
     /**
-     * Create an instance of {@link Result.FieldFechaDeCreaciN }
+     * Create an instance of {@link Result.CommentBody.Und.Item }
      * 
      */
-    public Result.FieldFechaDeCreaciN createResultFieldFechaDeCreaciN() {
-        return new Result.FieldFechaDeCreaciN();
-    }
-
-    /**
-     * Create an instance of {@link Result.FieldFechaDeCreaciN.Und }
-     * 
-     */
-    public Result.FieldFechaDeCreaciN.Und createResultFieldFechaDeCreaciNUnd() {
-        return new Result.FieldFechaDeCreaciN.Und();
-    }
-
-    /**
-     * Create an instance of {@link Result.FieldCategory }
-     * 
-     */
-    public Result.FieldCategory createResultFieldCategory() {
-        return new Result.FieldCategory();
-    }
-
-    /**
-     * Create an instance of {@link Result.FieldCategory.Und }
-     * 
-     */
-    public Result.FieldCategory.Und createResultFieldCategoryUnd() {
-        return new Result.FieldCategory.Und();
-    }
-
-    /**
-     * Create an instance of {@link Result.FieldProduct }
-     * 
-     */
-    public Result.FieldProduct createResultFieldProduct() {
-        return new Result.FieldProduct();
-    }
-
-    /**
-     * Create an instance of {@link Result.FieldProduct.Und }
-     * 
-     */
-    public Result.FieldProduct.Und createResultFieldProductUnd() {
-        return new Result.FieldProduct.Und();
-    }
-
-    /**
-     * Create an instance of {@link Result.TitleField }
-     * 
-     */
-    public Result.TitleField createResultTitleField() {
-        return new Result.TitleField();
-    }
-
-    /**
-     * Create an instance of {@link Result.TitleField.Es }
-     * 
-     */
-    public Result.TitleField.Es createResultTitleFieldEs() {
-        return new Result.TitleField.Es();
-    }
-
-    /**
-     * Create an instance of {@link Result.FieldDescripciN.Und.Item }
-     * 
-     */
-    public Result.FieldDescripciN.Und.Item createResultFieldDescripciNUndItem() {
-        return new Result.FieldDescripciN.Und.Item();
-    }
-
-    /**
-     * Create an instance of {@link Result.FieldFechaDeCreaciN.Und.Item }
-     * 
-     */
-    public Result.FieldFechaDeCreaciN.Und.Item createResultFieldFechaDeCreaciNUndItem() {
-        return new Result.FieldFechaDeCreaciN.Und.Item();
-    }
-
-    /**
-     * Create an instance of {@link Result.FieldCategory.Und.Item }
-     * 
-     */
-    public Result.FieldCategory.Und.Item createResultFieldCategoryUndItem() {
-        return new Result.FieldCategory.Und.Item();
-    }
-
-    /**
-     * Create an instance of {@link Result.FieldProduct.Und.Item }
-     * 
-     */
-    public Result.FieldProduct.Und.Item createResultFieldProductUndItem() {
-        return new Result.FieldProduct.Und.Item();
-    }
-
-    /**
-     * Create an instance of {@link Result.TitleField.Es.Item }
-     * 
-     */
-    public Result.TitleField.Es.Item createResultTitleFieldEsItem() {
-        return new Result.TitleField.Es.Item();
+    public Result.CommentBody.Und.Item createResultCommentBodyUndItem() {
+        return new Result.CommentBody.Und.Item();
     }
 
 }
