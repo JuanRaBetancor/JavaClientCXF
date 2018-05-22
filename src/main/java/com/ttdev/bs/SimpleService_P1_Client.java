@@ -1,6 +1,7 @@
 
 package com.ttdev.bs;
 
+
 /**
  * Please modify this class to meet your needs
  * This class is not complete
@@ -91,10 +92,7 @@ public final class SimpleService_P1_Client {
 		//Result.CommentBody comment = result.getCommentBody();
 		//System.out.println("Comentario: "+comment);
 		
-		
-		
-   
-    	
+
     	
         URL wsdlURL = SimpleService_Service.WSDL_LOCATION;
         if (args.length > 0 && args[0] != null && !"".equals(args[0])) { 
@@ -115,11 +113,12 @@ public final class SimpleService_P1_Client {
         
         {
         System.out.println("Invoking concat...");
-        java.lang.String _concat_s1 = result.getSubject();
+        java.lang.String _concat_s1 = "PEPASO";
         java.lang.String _concat_s2 = "PEPITO";
         java.lang.String _concat__return = port.concat(_concat_s1, _concat_s2);
         System.out.println("concat.result=" + _concat__return);
         result.setSubject(_concat__return);
+        result.getCommentBody().getUnd().getItem().setValue("Este comentario está editado");
         WebResource change = client2.resource("http://pccompshop.com/home/?q=es/endpoint/comment/4");
 		ClientResponse respuesta = change.header(newToken, "X-CSRF-Token").header("cookie",SessionName+"="+SessionId).put(ClientResponse.class, result);
 		String prf = respuesta.getEntity(String.class);
