@@ -61,14 +61,34 @@ public final class SimpleService_P1_Client {
     public static void main(String args[]) throws java.lang.Exception {
     	
     	
-    	
     	Client client2 = Client.create();
 		
-		WebResource webResource = client2.resource("http://pccompshop.com/home/?q=es/endpoint/comment/4");
+		WebResource webResource = client2.resource("http://pccompshop.com/home/?q=es/endpoint/comment/12");
 		ClientResponse response = webResource.accept("application/xml").get(ClientResponse.class);
 		Result result = response.getEntity(Result.class);
-		//System.out.println(result.getSubject());
+		//System.out.println(result);
+		
+		//Creo el objeto
+		/*
+		Result newComment = result;
+		Byte referenciaProducto = 48;
+		newComment.setSubject("Comentario creado desde código");
+		newComment.getCommentBody().getUnd().getItem().setValue("Body de ejemplo");
+		newComment.setName("PEPE");
+		newComment.setNid(referenciaProducto);
+		*/
+		
 		int producto = result.getNid();
+		int commentid = result.getCid();
+		String commentname = result.getName();
+		String commentsubject = result.getSubject();
+		String body = result.getCommentBody().getUnd().getItem().getValue();
+		
+		System.out.println("\nINICIANDO LA EJECUCIÓN");
+		System.out.println("\nComentario referido:");
+		System.out.println("ID del comentario: "+commentid+". Escrito por: "+commentname);
+		System.out.println("Asunto -> "+commentsubject);
+		System.out.println("Cuerpo -> "+ body);
 		
 		WebResource webResource2 = client2.resource("http://pccompshop.com/home/?q=es/endpoint/node/"+producto);
 		ClientResponse response2 = webResource2.accept("application/xml").get(ClientResponse.class);
@@ -99,7 +119,7 @@ public final class SimpleService_P1_Client {
 		String isauth = auth.substring(23,41);
 		String rol = auth.substring(54,67);
 		
-		System.out.println("\nINICIANDO LA EJECUCIÓN");
+	
 		System.out.println("\nInformación del usuario logeado:");
 		System.out.println("Usuario: "+nombre);
 		System.out.println("Correo: "+email);
@@ -108,7 +128,7 @@ public final class SimpleService_P1_Client {
 		Date date = new Date();
 		DateFormat hourdateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		String fecha = hourdateFormat.format(date);
-		System.out.println("\nInformación de la sesión");
+		System.out.println("\nInformación de la sesión:");
 		System.out.println("Token inicial: "+token);
 		String newToken = StringUtils.substringBetween(output, "<token>", "</token>");
 		System.out.println("New Token: "+newToken);
@@ -116,8 +136,14 @@ public final class SimpleService_P1_Client {
 		System.out.println("Session ID: "+SessionId);
 		String SessionName = StringUtils.substringBetween(output, "<session_name>", "</session_name>");
 		System.out.println("Session name: "+SessionName);
-			
-
+		
+		// AÑADIMOS UN COMENTARIO
+		/*
+		WebResource addcomment = client2.resource("http://pccompshop.com/home/?q=es/endpoint/comment/");
+		ClientResponse respuestaAdd = addcomment.header(newToken, "X-CSRF-Token").header("cookie",SessionName+"="+SessionId).post(ClientResponse.class, newComment);
+		String add = respuestaAdd.getEntity(String.class);
+		System.out.println(add);
+		*/
     	
         URL wsdlURL = SimpleService_Service.WSDL_LOCATION;
         if (args.length > 0 && args[0] != null && !"".equals(args[0])) { 
@@ -158,9 +184,19 @@ public final class SimpleService_P1_Client {
         result.getCommentBody().getUnd().getItem().setValue("Modificado por: "+ nombre + ", el día: " + fecha+".\n"+_concat__return);
         System.out.println("Cuerpo actualizado:\n "+result.getCommentBody().getUnd().getItem().getValue());
         
-        WebResource change = client2.resource("http://pccompshop.com/home/?q=es/endpoint/comment/4");
+        WebResource change = client2.resource("http://pccompshop.com/home/?q=es/endpoint/comment/12");
 		ClientResponse respuesta = change.header(newToken, "X-CSRF-Token").header("cookie",SessionName+"="+SessionId).put(ClientResponse.class, result);
 		String prf = respuesta.getEntity(String.class);
+		//System.out.println(prf); //DESCOMENTAR PARA VER ERRORES
+		
+		// CÓDIGO PARA BORRAR COMENTARIOS
+		/*
+		WebResource delete = client2.resource("http://pccompshop.com/home/?q=es/endpoint/comment/7");
+		ClientResponse respuestaDel = delete.header(newToken, "X-CSRF-Token").header("cookie",SessionName+"="+SessionId).delete(ClientResponse.class);
+		String del = respuestaDel.getEntity(String.class);
+		System.out.println(del);
+		*/
+		
 		System.out.println("\nFINALIZADA LA EJECUCIÓN");
 
 
